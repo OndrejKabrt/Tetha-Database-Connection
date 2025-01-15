@@ -8,13 +8,13 @@ using TethaRawGataway;
 
 namespace Tetha_Raw_Gataway
 {
-    public class ClientDAO : IRepozitory<Client>
+    public class ClientDAO : IRepozitoryDAO<Client>
 
     {
         public void Delete(Client element)
         {
             MySqlConnection conn = DatabaseSingleton.GetInstance();
-            using (MySqlCommand command = new MySqlCommand("DELETE FROM mec WHERE id = ?", conn))
+            using (MySqlCommand command = new MySqlCommand("DELETE FROM client WHERE id = ?", conn))
             {
                 command.Parameters.AddWithValue("?", element.ID);
                 command.ExecuteNonQuery();
