@@ -1,9 +1,5 @@
-﻿using TethaRawGataway;
-using System;
-using System.Xml.Serialization;
-
-
-namespace TethaRawGataway
+﻿
+namespace Tetha_Row_Gataway
 {
     class Program
     {

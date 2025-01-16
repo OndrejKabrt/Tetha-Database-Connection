@@ -1,11 +1,5 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TethaRawGataway
+namespace Tetha_Row_Gataway
 {
     //Třida Menu je námi používána Pro výpis položek v menu
     internal class Menu
@@ -26,7 +20,7 @@ namespace TethaRawGataway
             }
         }
 
-        public MenuItem Selection(int userInput)
+        public MenuItem Selection(int userInput) // Zde přijde už ověřené číslo z metody níže a zjišťuje se , zada číslo odpovídá nabízenému výběru
         {
             int index = userInput - 1;
             if (index < 0 || index >= menuItems.Count)
@@ -38,7 +32,7 @@ namespace TethaRawGataway
             return menuItems[index];
         }
 
-        public MenuItem Selection(string userInput)
+        public MenuItem Selection(string userInput) //Sebere string z metody níže a otestuje, jestli se jedná o číslo, pokud ano pošle do metody výše
         {
             int idx;
             if (!int.TryParse(userInput, out idx))
@@ -50,7 +44,7 @@ namespace TethaRawGataway
             return Selection(idx);
         }
 
-        public MenuItem Selection()
+        public MenuItem Selection() // Sebere vstup od uživatele a pošle do funkce výše
         {
             string input = System.Console.ReadLine();
             System.Console.WriteLine();

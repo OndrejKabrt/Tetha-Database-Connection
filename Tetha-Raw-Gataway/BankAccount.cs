@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TethaRawGataway;
+﻿using Tetha_Row_Gataway;
 
-namespace Tetha_Raw_Gataway
+namespace Tetha_Row_Gataway
 {
     public class BankAccount : IBaseClass
     {
@@ -52,7 +47,7 @@ namespace Tetha_Raw_Gataway
 
         public override string? ToString()
         {
-            return base.ToString();
+            return account_number +" "+currency+ " "+active;
         }
 
 

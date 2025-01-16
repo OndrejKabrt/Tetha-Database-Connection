@@ -1,21 +1,17 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TethaRawGataway;
+using Tetha_Row_Gataway;
 
-namespace Tetha_Raw_Gataway
+namespace Tetha_Row_Gataway
 {
     public class BankAccountDAO : IRepozitoryDAO<BankAccount>
     {
         public void Delete(BankAccount element)
         {
             MySqlConnection conn = DatabaseSingleton.GetInstance();
-            using (MySqlCommand command = new MySqlCommand("DELETE FROM bank_account WHERE id = ?", conn))
+            using (MySqlCommand command = new MySqlCommand("DELETE FROM bank_account WHERE id = @id and account_number = @account_number", conn))
             {
-                command.Parameters.AddWithValue("?", element.ID);
+                command.Parameters.AddWithValue("@id", element.ID);
+                command.Parameters.AddWithValue("@account_number", element.AccountNumber);
                 command.ExecuteNonQuery();
                 element.ID = 0;
             }
@@ -32,13 +28,13 @@ namespace Tetha_Raw_Gataway
                 {
                     BankAccount bank_account = new BankAccount
                     {
-                        ID = Convert.ToInt32(reader[0].ToString),
-                        AccountNumber = Convert.ToInt32(reader[1].ToString),
-                        Currency = Convert.ToSingle(reader[2].ToString),
-                        Active = Convert.ToBoolean(reader[3].ToString),
-                        Client_id = Convert.ToInt32(reader[4].ToString),
-                        Type_id = Convert.ToInt32(reader[5].ToString),
-                        Bank_id = Convert.ToInt32(reader[6].ToString)
+                        ID = Convert.ToInt32(reader[0].ToString()),
+                        AccountNumber = Convert.ToInt32(reader[1].ToString()),
+                        Currency = Convert.ToSingle(reader[2].ToString()),
+                        Active = Convert.ToBoolean(reader[3].ToString()),
+                        Client_id = Convert.ToInt32(reader[4].ToString()),
+                        Type_id = Convert.ToInt32(reader[5].ToString()),
+                        Bank_id = Convert.ToInt32(reader[6].ToString())
                     };
                     yield return bank_account;
                 }
@@ -60,13 +56,13 @@ namespace Tetha_Raw_Gataway
                 {
                     bank_account = new BankAccount
                     {
-                        ID = Convert.ToInt32(reader[0].ToString),
-                        AccountNumber = Convert.ToInt32(reader[1].ToString),
-                        Currency = Convert.ToSingle(reader[2].ToString),
-                        Active = Convert.ToBoolean(reader[3].ToString),
-                        Client_id = Convert.ToInt32(reader[4].ToString),
-                        Type_id = Convert.ToInt32(reader[5].ToString),
-                        Bank_id = Convert.ToInt32(reader[6].ToString)
+                        ID = Convert.ToInt32(reader[0].ToString()),
+                        AccountNumber = Convert.ToInt32(reader[1].ToString()),
+                        Currency = Convert.ToSingle(reader[2].ToString()),
+                        Active = Convert.ToBoolean(reader[3].ToString()),
+                        Client_id = Convert.ToInt32(reader[4].ToString()),
+                        Type_id = Convert.ToInt32(reader[5].ToString()),
+                        Bank_id = Convert.ToInt32(reader[6].ToString())
                     };
                 }
                 reader.Close();
@@ -85,7 +81,7 @@ namespace Tetha_Raw_Gataway
                 {
                     command.Parameters.AddWithValue("@id", element.ID);
                     command.Parameters.AddWithValue("@account_number", element.AccountNumber);
-                    command.Parameters.AddWithValue("@currency", element.Currency);
+                    command.Parameters.AddWithValue("@currency", 0);
                     command.Parameters.AddWithValue("@active", element.Active);
                     command.Parameters.AddWithValue("@client_id", element.Client_id);
                     command.Parameters.AddWithValue("@type_id", element.Type_id);
@@ -97,8 +93,8 @@ namespace Tetha_Raw_Gataway
             }
             else
             {
-                using (command = new MySqlCommand("UPDATE bank_account Set account_number = @account_number, currency = @currency, active = @active, client_id = @client_id," +
-                    " type_id = @type_id, bank_id = @bank_id Where id = @id", conn))
+                using (command = new MySqlCommand("UPDATE bank_account Set account_number = @account_number, currency = @currency, , client_id = @client_id," +
+                    " type_id = @type_id, bank_id = @bank_id Where id = @id and active = @active", conn))
                 {
                     command.Parameters.AddWithValue("@id", element.ID);
                     command.Parameters.AddWithValue("@account_number", element.AccountNumber);

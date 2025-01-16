@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TethaRawGataway;
+﻿
+using Tetha_Row_Gataway;
 
-namespace Tetha_Raw_Gataway
+namespace Tetha_Row_Gataway
 {
     public class AccountType : IBaseClass
     {
         private int id;
-        private string type_name;
+        private Type type_name;
         private double interest;
 
         public int ID { get => id; set => id = value; }
-        public string Type_name { get => type_name; set => type_name = value; }
+        public Type Type_name { get => type_name; set => type_name = value; }
         public double Interest { get => interest; set => interest = value; }
 
-        public AccountType(int id, string type_name, double interest)
+        public AccountType(int id, Type type_name, double interest)
         {
             this.id = id;
             this.type_name = type_name;
             this.interest = interest;
         }
 
-        public AccountType(string type_name, double interest)
+        public AccountType(Type type_name, double interest)
         {
             this.type_name = type_name;
             this.interest = interest;
@@ -36,7 +32,7 @@ namespace Tetha_Raw_Gataway
 
         public override string? ToString()
         {
-            return base.ToString();
+            return type_name + " " + interest;
         }
     }
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using TethaRawGataway;
+﻿using Tetha_Row_Gataway;
 
-namespace Tetha_Raw_Gataway
+namespace Tetha_Row_Gataway
 {
     public class Client :IBaseClass
     {
@@ -54,7 +48,7 @@ namespace Tetha_Raw_Gataway
 
         public override string? ToString()
         {
-            return base.ToString();
+            return id +" "+name + " "+ surname + " "+ phone_number +" "+email +" "+ birth_number+" "+birth_date;
         }
     }
 }

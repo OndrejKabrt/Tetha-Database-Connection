@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TethaRawGataway;
+using Tetha_Row_Gataway;
 
-namespace Tetha_Raw_Gataway
+namespace Tetha_Row_Gataway
 {
     public class BankRowGateway : IRepozitoryRG<Bank>
     {
-        public void DeleteByID(Bank element)
+        public void DeleteByID(int id)
         {
             MySqlConnection conn = DatabaseSingleton.GetInstance();
             using (MySqlCommand command = new MySqlCommand("DELETE FROM bank WHERE id = ? and ", conn))
             {
-                command.Parameters.AddWithValue("?", element.ID);
+                command.Parameters.AddWithValue("?", id);
                 command.ExecuteNonQuery();
-                element.ID = 0;
+                id = 0;
             }
         }
 
@@ -28,14 +28,14 @@ namespace Tetha_Raw_Gataway
 
             using (MySqlCommand command = new MySqlCommand("Select * from bank WHERE id = @id", conn))
             {
-                command.Parameters.Add(new MySqlParameter("id", id));
+                command.Parameters.Add(new MySqlParameter("@id", id));
                 MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
                     bank = new Bank
                     {
-                        ID = Convert.ToInt32(reader[0].ToString),
+                        ID = Convert.ToInt32(reader[0].ToString()),
                         Bank_name = reader[1].ToString(),
                         Bank_code = reader[2].ToString(),
                         Ico = reader[3].ToString()

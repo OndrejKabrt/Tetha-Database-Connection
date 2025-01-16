@@ -1558,9 +1558,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kabrt\\OneDrive\\Dokumenty\\C#\\Tetha-Raw-Gataway\\Tetha-Raw-Gataway\\Tetha-Raw-Gataway.csproj",
-      "projectName": "Tetha-Raw-Gataway",
-      "projectPath": "C:\\Users\\kabrt\\OneDrive\\Dokumenty\\C#\\Tetha-Raw-Gataway\\Tetha-Raw-Gataway\\Tetha-Raw-Gataway.csproj",
+      "projectUniqueName": "C:\\Users\\kabrt\\OneDrive\\Dokumenty\\C#\\Tetha-Raw-Gataway\\Tetha-Raw-Gataway\\Tetha-Row-Gataway.csproj",
+      "projectName": "Tetha-Row-Gataway",
+      "projectPath": "C:\\Users\\kabrt\\OneDrive\\Dokumenty\\C#\\Tetha-Raw-Gataway\\Tetha-Raw-Gataway\\Tetha-Row-Gataway.csproj",
       "packagesPath": "C:\\Users\\kabrt\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\kabrt\\OneDrive\\Dokumenty\\C#\\Tetha-Raw-Gataway\\Tetha-Raw-Gataway\\obj\\",
       "projectStyle": "PackageReference",

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TethaRawGataway
+namespace Tetha_Row_Gataway
 {
     //Vytvoříme si dědičné metody potřebné ke komunikaci s databází
     public interface IRepozitoryDAO<T> where T : IBaseClass

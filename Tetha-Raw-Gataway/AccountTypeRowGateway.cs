@@ -1,23 +1,19 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TethaRawGataway;
 
-namespace Tetha_Raw_Gataway
+using Tetha_Row_Gataway;
+
+namespace Tetha_Row_Gataway
 {
     public class AccountTypeRowGateway : IRepozitoryRG<AccountType>
     {
-        public void DeleteByID(AccountType element)
+        public void DeleteByID(int id)
         {
             MySqlConnection conn = DatabaseSingleton.GetInstance();
             using (MySqlCommand command = new MySqlCommand("DELETE FROM account_type WHERE id = ?", conn))
             {
-                command.Parameters.AddWithValue("?", element.ID);
+                command.Parameters.AddWithValue("?", id);
                 command.ExecuteNonQuery();
-                element.ID = 0;
+                id = 0;
             }
         }
 
@@ -28,7 +24,7 @@ namespace Tetha_Raw_Gataway
 
             using (MySqlCommand command = new MySqlCommand("Select * from account_type WHERE id = @id", conn))
             {
-                command.Parameters.Add(new MySqlParameter("id", id));
+                command.Parameters.Add(new MySqlParameter("@id", id));
                 MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -36,7 +32,7 @@ namespace Tetha_Raw_Gataway
                     account_type = new AccountType
                     {
                         ID = Convert.ToInt32(reader[0].ToString),
-                        Type_name = reader[1].ToString(),
+                        Type_name = (Type)Enum.Parse(typeof(Type), reader[1].ToString(), true),
                         Interest = Convert.ToDouble(reader[2].ToString())
                     };
                 }
@@ -62,7 +58,7 @@ namespace Tetha_Raw_Gataway
         {
             MySqlConnection conn = DatabaseSingleton.GetInstance();
 
-            using (MySqlCommand command = new MySqlCommand("UPDATE bank Set type_name = @type_name, interest = @interest Where id = @id", conn))
+            using (MySqlCommand command = new MySqlCommand("UPDATE bank Set interest = @interest Where id = @id, type_name = @type_name", conn))
             {
                 command.Parameters.AddWithValue("@id", element.ID);
                 command.Parameters.AddWithValue("@type_name", element.Type_name);

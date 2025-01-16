@@ -1,12 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
+using Tetha_Row_Gataway;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
-using TethaRawGataway;
 
-namespace Tetha_Raw_Gataway
+namespace Tetha_Row_Gataway
 {
     public class ClientDAO : IRepozitoryDAO<Client>
 
@@ -14,9 +16,10 @@ namespace Tetha_Raw_Gataway
         public void Delete(Client element)
         {
             MySqlConnection conn = DatabaseSingleton.GetInstance();
-            using (MySqlCommand command = new MySqlCommand("DELETE FROM client WHERE id = ?", conn))
+            using (MySqlCommand command = new MySqlCommand("DELETE FROM client WHERE id = @id and birth_number = @Birth_number", conn))
             {
-                command.Parameters.AddWithValue("?", element.ID);
+                command.Parameters.AddWithValue("@id", element.ID);
+                command.Parameters.AddWithValue("@Birth_number", element.Birth_number);
                 command.ExecuteNonQuery();
                 element.ID = 0;
             }
@@ -33,7 +36,7 @@ namespace Tetha_Raw_Gataway
                 {
                     Client client = new Client
                     {
-                        ID = Convert.ToInt32(reader[0].ToString),
+                        ID = Convert.ToInt32(reader[0].ToString()), // Corrected usage of ToString()
                         Name = reader[1].ToString(),
                         Surname = reader[2].ToString(),
                         Phone_number = reader[3].ToString(),
@@ -61,7 +64,7 @@ namespace Tetha_Raw_Gataway
                 {
                     client = new Client
                     {
-                        ID = Convert.ToInt32(reader[0].ToString),
+                        ID = Convert.ToInt32(reader[0].ToString()),
                         Name = reader[1].ToString(),
                         Surname = reader[2].ToString(),
                         Phone_number = reader[3].ToString(),
